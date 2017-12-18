@@ -81,6 +81,14 @@ const userType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Users\'s username'
     },
+    firstName: {
+      type: GraphQLString,
+      description: 'Users\'s first name'
+    },
+    lastName: {
+      type: GraphQLString,
+      description: 'Users\'s last name'
+    },
     email: {
       type: GraphQLString,
       description: 'User\'s email'
@@ -130,19 +138,58 @@ const addEntryMutation = mutationWithClientMutationId({
     entryEdge: {
       type: entryEdge,
       resolve: (obj) => {
-        const cursorId = cursorForObjectInConnection(getEntries(1), obj);
+        const cursorId = cursorForObjectInConnection(getEntries(obj.userId), obj);
         return { node: obj, cursor: cursorId };
       }
     },
     viewer: {
       type: userType,
-      resolve: () => getUser(1)
+      resolve: ({ userId }) => getUser(userId)
     }
   },
 
   mutateAndGetPayload: ({ userId, text }) => addEntry(userId, text)
 });
 
+const modifyEntryMutation = mutationWithClientMutationId({
+  name: 'modifyEntry',
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) },
+    text: { type: new GraphQLNonNull(GraphQLString) }
+  },
+
+  outputFields: {
+    entryEdge: {
+      type: entryEdge,
+      resolve: (obj) => {
+        const cursorId = cursorForObjectInConnection(getEntries(obj.userId), obj);
+        return { node: obj, cursor: cursorId };
+      }
+    },
+    viewer: {
+      type: userType,
+      resolve: ({ userId }) => getUser(userId)
+    }
+  },
+
+  mutateAndGetPayload: ({ id, text }) => modifyEntry(fromGlobalId(id).id, text)
+});
+
+const removeEntryMutation = mutationWithClientMutationId({
+  name: 'removeEntry',
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) }
+  },
+
+  outputFields: {
+    viewer: {
+      type: userType,
+      resolve: results => getUser(results[0].userId)
+    }
+  },
+
+  mutateAndGetPayload: ({ id, text }) => removeEntry(fromGlobalId(id).id, text)
+});
 
 /**
  * This is the type that will be the root of our query,
@@ -170,8 +217,9 @@ const queryType = new GraphQLObjectType({
 const mutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
-    addEntry: addEntryMutation
-    // Add your own mutations here
+    addEntry: addEntryMutation,
+    modifyEntry: modifyEntryMutation,
+    removeEntry: removeEntryMutation
   })
 });
 

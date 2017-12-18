@@ -37,7 +37,6 @@ db
   .write();
 
 const getUser = async (id) => {
-  // const db = await low(adapter);
   return db
     .get('users')
     .find(user => user.id === id)
@@ -45,7 +44,6 @@ const getUser = async (id) => {
 };
 
 const addEntry = async (userId, text) => {
-  // const db = await low(adapter);
   return db.get('entries')
     .push({ userId, text })
     .last()
@@ -76,7 +74,6 @@ const removeEntry = async (id) => {
 };
 
 const getEntries = async (userId) => {
-  // const db = await low(adapter);
   return db
     .get('entries')
     .filter(entry => entry.userId === userId)

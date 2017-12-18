@@ -43,8 +43,22 @@ type EntryEdge {
   cursor: String!
 }
 
+input modifyEntryInput {
+  id: ID!
+  text: String!
+  clientMutationId: String
+}
+
+type modifyEntryPayload {
+  entryEdge: EntryEdge
+  viewer: User
+  clientMutationId: String
+}
+
 type Mutation {
   addEntry(input: addEntryInput!): addEntryPayload
+  modifyEntry(input: modifyEntryInput!): modifyEntryPayload
+  removeEntry(input: removeEntryInput!): removeEntryPayload
 }
 
 # An object with an ID
@@ -77,6 +91,16 @@ type Query {
   viewer(id: ID!): User
 }
 
+input removeEntryInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type removeEntryPayload {
+  viewer: User
+  clientMutationId: String
+}
+
 # A person who uses our app
 type User implements Node {
   # The ID of an object
@@ -87,6 +111,12 @@ type User implements Node {
 
   # Users's username
   username: String
+
+  # Users's first name
+  firstName: String
+
+  # Users's last name
+  lastName: String
 
   # User's email
   email: String
