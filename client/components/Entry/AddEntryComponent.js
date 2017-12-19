@@ -1,22 +1,7 @@
 import React from 'react';
 import Relay from 'react-relay';
-import Dropdown from 'react-dropdown';
-import { Grid, Cell, Button } from 'react-mdl';
-import Page from '../Page/PageComponent';
+import { Grid, Cell, Button, Textfield, Icon } from 'react-mdl';
 import AddEntryMutation from './AddEntryMutation';
-
-const options = [
-  { value: 'none', label: 'Please select a feature' },
-  { value: 'nodejs', label: 'Node.js' },
-  { value: 'html', label: 'HTML5' },
-  { value: 'css', label: 'CSS3' },
-];
-
-const inputData = {
-  nodejs: { name: 'Nodejs', url: 'https://nodejs.org', description: 'Node.js® is a JavaScript runtime built on Chrome\'s V8 JavaScript engine' },
-  html: { name: 'Html5', url: 'https://www.w3.org/TR/html5/', description: '5th major revision of the core language of the World Wide Web' },
-  css: { name: 'css', url: 'https://www.w3.org/Style/CSS/Overview.en.html', description: 'Cascading Style Sheets (CSS) is a simple mechanism for adding style to Web documents.' }
-};
 
 export default class Feature extends React.Component {
   static propTypes = {
@@ -25,36 +10,41 @@ export default class Feature extends React.Component {
 
   state = {
     form: {
-      dropdown: options[0]
+      text: ''
     }
-  }
+  };
 
-  onSelect = (e) => {
-    this.setState({ form: { dropdown: e } });
-  }
+  onChange = (e) => {
+    console.log('onChange', e.target.text);
+    this.setState({ form: { text: e.value } });
+  };
 
   addFeature = () => {
-    const value = this.state.form.dropdown.value;
+    const value = this.state.form.text.value;
     if (value === 'none') {
       return;
     }
 
-    const addEntryMutation = new AddEntryMutation({ viewerId: this.props.viewer.id, ...inputData[value] });
+    const addEntryMutation = new AddEntryMutation({ viewerId: this.props.viewer.id, ...{ text: value, timestamp: 1513542244724, userId: 1 } });
     Relay.Store.commitUpdate(addEntryMutation);
-  }
+  };
 
   render() {
     return (
-      <Page heading='Add a Feature'>
+      <div>
         <Grid>
-          <Cell col={9}>
-            <Dropdown options={options} onChange={this.onSelect.bind(this)} value={this.state.form.dropdown} />
+          <Cell col={10}>
+            <Textfield
+              onChange={this.onChange}
+              label='Enter new entry...'
+            />
+
           </Cell>
-          <Cell col={3} style={{ textAlign: 'center' }}>
-            <Button raised accent onClick={this.addFeature.bind(this)}>Add Feature</Button>
+          <Cell col={2}>
+            <Button className={'addEntry'} raised accent onClick={this.addFeature}><Icon name={'send'} /></Button>
           </Cell>
         </Grid>
-      </Page>
+      </div>
     );
   }
 }

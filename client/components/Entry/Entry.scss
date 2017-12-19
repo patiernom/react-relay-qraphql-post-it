@@ -1,0 +1,18 @@
+@import '../variables.scss';
+
+.root :global {
+  .mdl-textfield {
+    width: 100%;
+  }
+
+  .addEntry {
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+    margin: 0 10px;
+    line-height: 1em;
+    height: auto;
+    min-width: 0;
+  }
+}

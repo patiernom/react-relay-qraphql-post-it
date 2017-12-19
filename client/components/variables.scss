@@ -1,9 +1,20 @@
 /* ==========================================================================
    COLOR
    ========================================================================== */
-$white: #FFFFFF;
-$black: #333333;
-$gray: #E3E3E3;
-$blue: #00BCD4;
-$black-light: #2B2D2E;
+$dark-primary-color: #0288D1;
+$default-primary-color: #03A9F4;
+$light-primary-color: #B3E5FC;
+$text-primary-color: #FFFFFF;
+$accent-color: #FF4081;
+$primary-text-color: #212121;
+$secondary-text-color: #757575;
+$divider-color: #BDBDBD;
 
+.dark-primary-color    { background: $dark-primary-color; }
+.default-primary-color { background: $default-primary-color; }
+.light-primary-color   { background: $light-primary-color; }
+.text-primary-color    { color: $text-primary-color; }
+.accent-color          { background: $accent-color; }
+.primary-text-color    { color: $primary-text-color; }
+.secondary-text-color  { color: $secondary-text-color; }
+.divider-color         { border-color: $divider-color; }

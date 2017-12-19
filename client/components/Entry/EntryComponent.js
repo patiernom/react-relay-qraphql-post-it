@@ -1,8 +1,7 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button } from 'react-mdl';
-import Page from '../Page/PageComponent';
-import styles from './Feature.scss';
+import { ListItem, List, ListItemContent, ListItemAction, Icon, Grid, Cell } from 'react-mdl';
+import styles from './Entry.scss';
 import AddEntry from './AddEntryComponent';
 
 export default class Entry extends React.Component {
@@ -12,28 +11,26 @@ export default class Entry extends React.Component {
 
   render() {
     return (
-      <div>
-        <Page heading='Entries'>
-          <Grid>
-            {this.props.viewer.entries.edges.map((edge) => {
-              return (
-                <Cell col={4} key={edge.node.id}>
-                  <Card className={styles.card}>
-                    <CardText className={styles.description}>
-                      {edge.node.userId}
-                    </CardText>
-                    <CardText className={styles.description}>
-                      {edge.node.timestamp}
-                    </CardText>
-                    <CardText className={styles.description}>
-                      {edge.node.text}
-                    </CardText>
-                  </Card>
-                </Cell>
-              );
-            })}
-          </Grid>
-        </Page>
+      <div className={styles.root}>
+        <Grid>
+          <Cell col={11}>
+            <List>
+              {this.props.viewer.entries.edges.map((edge) => {
+                return (
+                  <ListItem key={edge.node.id}>
+                    <ListItemContent icon='person'>{edge.node.userId} {edge.node.timestamp} {edge.node.text}</ListItemContent>
+                    <ListItemAction>
+                      <a href='#'><Icon name='edit' /></a>
+                    </ListItemAction>
+                    <ListItemAction>
+                      <a href='#'><Icon name='delete' /></a>
+                    </ListItemAction>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Cell>
+        </Grid>
         <AddEntry viewer={this.props.viewer} />
       </div>
     );

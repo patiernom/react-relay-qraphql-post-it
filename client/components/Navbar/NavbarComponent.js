@@ -1,24 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { Layout, Header, Navigation, Drawer } from 'react-mdl';
+import { Header, Navigation, Drawer, Layout, Icon } from 'react-mdl';
 import styles from './Navbar.scss';
 
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
   render() {
-    const title = 'Relay Fullstack';
+    const { title, msgNumber } = this.props;
+
     return (
-      <div style={{height: '64px', position: 'relative'}}>
-        <Layout fixedHeader className={styles.root}>
-          <Header title={<Link to='/'>{title}</Link>} scroll>
-            <Navigation>
-              <Link to='/signup'>Sign up</Link>
-              <Link to='/login'>Login</Link>
-            </Navigation>
+      <div className={styles.root}>
+        <Layout fixedHeader fixedDrawer>
+          <Header>
+            <div className={'msgNumber'}> <span><Icon name={'create'} /> {msgNumber}</span></div>
           </Header>
-          <Drawer title={<Link to='/' style={{ fontSize: '1.5em' }}>{title}</Link>} className='mdl-layout--small-screen-only'>
+          <Drawer title={<Link to='/'>{title}</Link>}>
             <Navigation>
-              <Link to='/signup'>Sign up</Link>
-              <Link to='/login'>Login</Link>
+              <a href='https://github.com/patiernom/react-relay-qraphql-post-it' target='_blank' rel='noopener noreferrer'>Help</a>
             </Navigation>
           </Drawer>
         </Layout>
@@ -26,3 +24,15 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  title: PropTypes.string,
+  msgNumber: PropTypes.number
+};
+
+Navbar.defaultProps = {
+  title: '',
+  msgNumber: 0
+};
+
+export default Navbar;

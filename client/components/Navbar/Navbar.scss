@@ -1,22 +1,42 @@
 @import '../variables.scss';
 
 .root :global {
+  .mdl-layout__header {
+    background-color: $dark-primary-color;
+  }
+
   .mdl-layout-title a {
-    color: $white;
+    color: $text-primary-color;
     text-decoration: none;
     font-weight: normal;
   }
 
   .mdl-layout__header-row .mdl-navigation__link {
-    color: $white !important;
+    color: $text-primary-color !important;
   }
 
   .mdl-layout__drawer > .mdl-layout-title {
     padding-top: 36px;
-    background-color: $blue;
+    background-color: $default-primary-color;
   }
 
   .mdl-layout__drawer-button {
-    color: $white !important;
+    color: $text-primary-color !important;
+  }
+
+  .msgNumber {
+    text-align: right;
+    width: 100%;
+    color: $text-primary-color;
+    font-weight: 400;
+
+    i {
+      background: $accent-color;
+      border-radius: 50%;
+      text-align: center;
+      vertical-align: middle;
+      padding: 5px;
+      margin: 0 10px;
+    }
   }
 }
