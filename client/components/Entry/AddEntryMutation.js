@@ -19,7 +19,7 @@ class AddEntryMutation extends Relay.Mutation {
     return Relay.QL`
       fragment on AddEntryPayload {
         entryEdge,
-        viewer(id: 1) { entries }
+        viewer { entries }
       }
     `;
   }

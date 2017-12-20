@@ -138,11 +138,10 @@ const addEntryMutation = mutationWithClientMutationId({
     entryEdge: {
       type: entryEdge,
       resolve: async (obj) => {
-        const current = getEntry(fromGlobalId(obj.id).id);
         const array = await getEntries(obj.userId);
         const cursorId = cursorForObjectInConnection(array, obj);
 
-        return { node: current, cursor: cursorId };
+        return { node: obj, cursor: cursorId };
       }
     },
     viewer: {

@@ -26,24 +26,23 @@ export default class Feature extends React.Component {
 
     const data = {
       viewerId: this.props.viewer.id,
-      text: value,
-      userId: '1'
+      ...{
+        text: value,
+        userId: '1'
+      }
     };
 
     const addEntryMutation = new AddEntryMutation(data);
     const onSuccess = () => {
-      console.log('Mutation successful!');
+      return this.setState({ form: { text: '' } });
     };
+
     const onFailure = (transaction) => {
       const error = transaction.getError() || new Error('Mutation failed.');
       console.error(error);
     };
 
-    // const transaction = Relay.Store.applyUpdate(addEntryMutation, { onFailure, onSuccess });
-    //
-    // transaction.commit();
-
-    Relay.Store.commitUpdate(addEntryMutation);
+    Relay.Store.commitUpdate(addEntryMutation, { onFailure, onSuccess });
   };
 
   render() {
@@ -54,6 +53,7 @@ export default class Feature extends React.Component {
             <Textfield
               onChange={this.onChange}
               label='Enter new entry...'
+              value={this.state.form.text}
             />
 
           </Cell>
