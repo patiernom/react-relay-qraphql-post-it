@@ -3,7 +3,6 @@ import { IndexRoute, Route, Redirect } from 'react-router';
 
 import ViewerQuery from './ViewerQuery';
 import AppContainer from '../components/App/AppContainer';
-// import FeatureContainer from '../components/Feature/FeatureContainer';
 import EntryContainer from '../components/Entry/EntryContainer';
 
 export default (

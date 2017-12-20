@@ -11,16 +11,15 @@ class AddEntryMutation extends Relay.Mutation {
   getVariables() {
     return {
       text: this.props.text,
-      timestamp: this.props.timestamp,
       userId: this.props.userId
     };
   }
 
   getFatQuery() {
     return Relay.QL`
-      fragment on addEntryPayload {
+      fragment on AddEntryPayload {
         entryEdge,
-        viewer { entries }
+        viewer(id: 1) { entries }
       }
     `;
   }

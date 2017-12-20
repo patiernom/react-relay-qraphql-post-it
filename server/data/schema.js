@@ -128,7 +128,7 @@ const { connectionType: entryConnection, edgeType: entryEdge } = connectionDefin
  */
 
 const addEntryMutation = mutationWithClientMutationId({
-  name: 'addEntry',
+  name: 'AddEntry',
   inputFields: {
     userId: { type: new GraphQLNonNull(GraphQLID) },
     text: { type: new GraphQLNonNull(GraphQLString) }
@@ -137,9 +137,12 @@ const addEntryMutation = mutationWithClientMutationId({
   outputFields: {
     entryEdge: {
       type: entryEdge,
-      resolve: (obj) => {
-        const cursorId = cursorForObjectInConnection(getEntries(obj.userId), obj);
-        return { node: obj, cursor: cursorId };
+      resolve: async (obj) => {
+        const current = getEntry(fromGlobalId(obj.id).id);
+        const array = await getEntries(obj.userId);
+        const cursorId = cursorForObjectInConnection(array, obj);
+
+        return { node: current, cursor: cursorId };
       }
     },
     viewer: {
@@ -152,7 +155,7 @@ const addEntryMutation = mutationWithClientMutationId({
 });
 
 const modifyEntryMutation = mutationWithClientMutationId({
-  name: 'modifyEntry',
+  name: 'ModifyEntry',
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) },
     text: { type: new GraphQLNonNull(GraphQLString) }
@@ -176,7 +179,7 @@ const modifyEntryMutation = mutationWithClientMutationId({
 });
 
 const removeEntryMutation = mutationWithClientMutationId({
-  name: 'removeEntry',
+  name: 'RemoveEntry',
   inputFields: {
     id: { type: new GraphQLNonNull(GraphQLID) }
   },

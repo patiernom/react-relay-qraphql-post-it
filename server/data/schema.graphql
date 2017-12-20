@@ -1,10 +1,10 @@
-input addEntryInput {
+input AddEntryInput {
   userId: ID!
   text: String!
   clientMutationId: String
 }
 
-type addEntryPayload {
+type AddEntryPayload {
   entryEdge: EntryEdge
   viewer: User
   clientMutationId: String
@@ -43,22 +43,22 @@ type EntryEdge {
   cursor: String!
 }
 
-input modifyEntryInput {
+input ModifyEntryInput {
   id: ID!
   text: String!
   clientMutationId: String
 }
 
-type modifyEntryPayload {
+type ModifyEntryPayload {
   entryEdge: EntryEdge
   viewer: User
   clientMutationId: String
 }
 
 type Mutation {
-  addEntry(input: addEntryInput!): addEntryPayload
-  modifyEntry(input: modifyEntryInput!): modifyEntryPayload
-  removeEntry(input: removeEntryInput!): removeEntryPayload
+  addEntry(input: AddEntryInput!): AddEntryPayload
+  modifyEntry(input: ModifyEntryInput!): ModifyEntryPayload
+  removeEntry(input: RemoveEntryInput!): RemoveEntryPayload
 }
 
 # An object with an ID
@@ -91,12 +91,12 @@ type Query {
   viewer(id: ID!): User
 }
 
-input removeEntryInput {
+input RemoveEntryInput {
   id: ID!
   clientMutationId: String
 }
 
-type removeEntryPayload {
+type RemoveEntryPayload {
   viewer: User
   clientMutationId: String
 }

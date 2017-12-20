@@ -531,7 +531,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "addEntryInput",
+                      "name": "AddEntryInput",
                       "ofType": null
                     }
                   },
@@ -540,7 +540,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "addEntryPayload",
+                "name": "AddEntryPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -558,7 +558,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "modifyEntryInput",
+                      "name": "ModifyEntryInput",
                       "ofType": null
                     }
                   },
@@ -567,7 +567,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "modifyEntryPayload",
+                "name": "ModifyEntryPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -585,7 +585,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "removeEntryInput",
+                      "name": "RemoveEntryInput",
                       "ofType": null
                     }
                   },
@@ -594,7 +594,7 @@
               ],
               "type": {
                 "kind": "OBJECT",
-                "name": "removeEntryPayload",
+                "name": "RemoveEntryPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -608,7 +608,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "addEntryInput",
+          "name": "AddEntryInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -657,7 +657,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "addEntryPayload",
+          "name": "AddEntryPayload",
           "description": null,
           "fields": [
             {
@@ -704,7 +704,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "modifyEntryInput",
+          "name": "ModifyEntryInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -753,7 +753,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "modifyEntryPayload",
+          "name": "ModifyEntryPayload",
           "description": null,
           "fields": [
             {
@@ -800,7 +800,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "removeEntryInput",
+          "name": "RemoveEntryInput",
           "description": null,
           "fields": null,
           "inputFields": [
@@ -835,7 +835,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "removeEntryPayload",
+          "name": "RemoveEntryPayload",
           "description": null,
           "fields": [
             {

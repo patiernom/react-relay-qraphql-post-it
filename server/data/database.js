@@ -24,9 +24,9 @@ class Entry {
 const db = low(new Memory());
 const defaultUser = new User('1', 'Marco', 'Patierno', 'patiernom', 'marco_patienro@msn.com');
 const defaultEntries = [
-  new Entry('1', '1', 1513542244724, 'dsasda sdasd asdas'),
-  new Entry('2', '1', 1513542245598, 'dsasda sdasd asdas'),
-  new Entry('3', '1', 1513542246300, 'dsasda sdasd asdas')
+  new Entry(crypto.randomBytes(10).toString('hex'), '1', Date.now(), 'example 1'),
+  new Entry(crypto.randomBytes(10).toString('hex'), '1', Date.now(), 'example 2'),
+  new Entry(crypto.randomBytes(10).toString('hex'), '1', Date.now(), 'example 3')
 ];
 /*
 * Add feature in memory
@@ -45,12 +45,13 @@ const getUser = async (id) => {
 
 const addEntry = async (userId, text) => {
   return db.get('entries')
-    .push({ userId, text })
+    // .push({ userId, text })
+    .push(new Entry(crypto.randomBytes(10).toString('hex'), userId, Date.now(), text))
     .last()
-    .assign({
-      id: crypto.randomBytes(10).toString('hex'),
-      timestamp: Date.now()
-    })
+    // .assign({
+    //  id: crypto.randomBytes(10).toString('hex'),
+    //  timestamp: Date.now()
+    // })
     .write();
 };
 
